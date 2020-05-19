@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="2">
   <name>rclc</name>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <description>The ROS client library in C.</description>
   <maintainer email="jan.staschulat@de.bosch.com">Jan Staschulat</maintainer>
   <maintainer email="julianbermudez@eprosima.com">Julián Bermúdez Ortega</maintainer>
@@ -24,8 +24,10 @@
   <exec_depend>rosidl_generator_c</exec_depend>
 
   <test_depend>ament_cmake_gtest</test_depend>
-  <test_depend>ament_lint_common</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
   <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>launch_testing</test_depend>
   <test_depend>osrf_testing_tools_cpp</test_depend>
   <test_depend>std_msgs</test_depend>
 
