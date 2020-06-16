@@ -1,0 +1,13 @@
+ros-rolling-rclc-examples (0.1.2-2focal) focal; urgency=high
+
+  * Fixed compiler errors for bloom release
+
+ -- Jan Staschulat <jan.staschulat@de.bosch.com>  Tue, 19 May 2020 04:00:00 -0000
+
+ros-rolling-rclc-examples (0.1.1-2focal) focal; urgency=high
+
+  * Initial release
+
+ -- Jan Staschulat <jan.staschulat@de.bosch.com>  Thu, 14 May 2020 04:00:00 -0000
+
+
