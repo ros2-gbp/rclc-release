@@ -1,6 +1,19 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package rclc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+0.1.7 (2021-01-20)
+------------------
+* Corrected corrupted changelog
+
+0.1.6 (2021-01-20)
+------------------
+* Fixed issues due to Github Action timing delays on cloud build
+* Fixed missing package dependency in Github Action for Eloquent
+
+0.1.5 (2020-12-11)
+------------------
+* Added support for services,clients and guard_conditions to rclc executor
+* Added table for bloom release status in README file
 
 0.1.4 (2020-11-25)
 ------------------
