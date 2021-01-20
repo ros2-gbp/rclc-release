@@ -1,6 +1,17 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package rclc_examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+0.1.7 (2021-01-20)
+------------------
+* Updated version
+
+0.1.6 (2021-01-20)
+------------------
+* Updated version
+
+0.1.5 (2020-12-11)
+------------------
+* Added support for services,clients and guard_conditions to rclc executor
 
 0.1.4 (2020-11-25)
 ------------------
