@@ -1,3 +1,29 @@
+## rclc (rolling) - 1.0.0-1
+
+The packages in the `rclc` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling rclc` on `Thu, 04 Mar 2021 15:09:04 -0000`
+
+These packages were released:
+- `rclc`
+- `rclc_examples`
+- `rclc_lifecycle`
+
+Version of package(s) in repository `rclc`:
+
+- upstream repository: https://github.com/ros2/rclc.git
+- release repository: https://github.com/ros2-gbp/rclc-release.git
+- rosdistro version: `0.1.7-1`
+- old version: `0.1.7-1`
+- new version: `1.0.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.0`
+- catkin_pkg version: `0.4.23`
+- rosdep version: `0.20.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## rclc (dashing) - 1.0.0-1
 
 The packages in the `rclc` repository were released into the `dashing` distro by running `/usr/bin/bloom-release --rosdistro dashing --track dashing rclc` on `Thu, 04 Mar 2021 15:04:42 -0000`
