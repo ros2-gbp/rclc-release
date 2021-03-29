@@ -1,4 +1,4 @@
-// Copyright (c) 2020 - for information on the respective copyright owner
+// Copyright (c) 2019 - for information on the respective copyright owner
 // see the NOTICE file and/or the repository https://github.com/ros2/rclc.
 // Copyright 2014 Open Source Robotics Foundation, Inc.
 //
@@ -14,28 +14,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef RCLC__RCLC_H_
-#define RCLC__RCLC_H_
+#include "rclc/sleep.h"
 
-#if __cplusplus
-extern "C"
+#ifdef WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+
+void
+rclc_sleep_ms(
+  unsigned int ms)
 {
+#ifdef WIN32
+  Sleep(ms);
+#else
+  usleep(ms * 1000);
 #endif
-
-#include <stdbool.h>  // For bool
-#include <stddef.h>  // For size_t
-
-#include "rclc/init.h"
-#include "rclc/node.h"
-#include "rclc/publisher.h"
-#include "rclc/subscription.h"
-#include "rclc/timer.h"
-#include "rclc/client.h"
-#include "rclc/service.h"
-#include "rclc/types.h"
-#include "rclc/visibility_control.h"
-#if __cplusplus
 }
-#endif
-
-#endif  // RCLC__RCLC_H_

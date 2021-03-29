@@ -15,9 +15,6 @@
 // limitations under the License.
 
 #include "rclc/executor.h"
-
-#include <unistd.h>
-
 #include <rcutils/time.h>
 
 // Include backport of function 'rcl_wait_set_is_valid' introduced in Foxy
@@ -934,7 +931,9 @@ rclc_executor_spin_some(rclc_executor_t * executor, const uint64_t timeout_ns)
       executor->info.number_of_guard_conditions, executor->info.number_of_timers,
       executor->info.number_of_clients, executor->info.number_of_services,
       executor->info.number_of_events,
-      executor->context, rcl_get_default_allocator());
+      executor->context,
+      *executor->allocator);
+
     if (rc != RCL_RET_OK) {
       PRINT_RCLC_ERROR(rclc_executor_spin_some, rcl_wait_set_init);
       return rc;
@@ -1106,7 +1105,7 @@ rclc_executor_spin_one_period(rclc_executor_t * executor, const uint64_t period)
   ret = rcutils_system_time_now(&end_time_point);
   sleep_time = (executor->invocation_time + period) - end_time_point;
   if (sleep_time > 0) {
-    usleep(sleep_time / 1000);
+    rclc_sleep_ms(sleep_time / 1000000);
   }
   executor->invocation_time += period;
   return ret;
