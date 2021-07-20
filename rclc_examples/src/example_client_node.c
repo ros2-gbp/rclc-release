@@ -1,5 +1,5 @@
 // Copyright (c) 2020 - for information on the respective copyright owner
-// see the NOTICE file and/or the repository https://github.com/micro-ROS/rclc.
+// see the NOTICE file and/or the repository https://github.com/ros2/rclc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -74,6 +74,9 @@ int main(int argc, const char * const * argv)
 
   RCCHECK(rcl_send_request(&client, &req, &seq))
   printf("Send service request %ld + %ld.\n", req.a, req.b);
+
+  // Optional prepare for avoiding allocations during spin
+  rclc_executor_prepare(&executor);
 
   rclc_executor_spin(&executor);
 
