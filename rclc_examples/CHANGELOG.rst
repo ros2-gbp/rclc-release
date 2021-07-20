@@ -2,27 +2,15 @@
 Changelog for package rclc_examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.0.2 (2021-07-17)
+1.0.2 (2021-07-17)
 ------------------
-* Added example for parameter server
+* Bumped version (tag with version 1.0.1 already exists)
+
+1.0.1 (2021-07-17)
+------------------
 * Added example for quality of service entity creation API
+* Added example for executor prepare API
 * Added example for subscription with context
-* Added example for executor_prepare API
-
-2.0.1 (2021-05-28)
-------------------
-* added quality declaration
-
-2.0.0 (2021-04-23)
-------------------
-* added codecov support
-* new API of rcl_lifecycle in Rolling required major version bump
-
-1.0.1 (2021-03-29)
-------------------
-* Windows port
-* Compatibility sleep function (Windows, POSIX-OS)
-* Fixed RCL lifecycle API change for Rolling
 
 1.0.0 (2021-03-04)
 ------------------

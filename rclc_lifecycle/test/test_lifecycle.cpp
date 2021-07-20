@@ -71,8 +71,7 @@ TEST(TestRclcLifecycle, lifecycle_node) {
     &lifecycle_node,
     &my_node,
     &state_machine_,
-    &allocator,
-    true);
+    &allocator);
 
   EXPECT_EQ(RCL_RET_OK, res);
 
@@ -108,8 +107,7 @@ TEST(TestRclcLifecycle, lifecycle_node_transitions) {
     &lifecycle_node,
     &my_node,
     &state_machine_,
-    &allocator,
-    false);
+    &allocator);
 
   // configure
   res = rclc_lifecycle_change_state(
@@ -178,8 +176,7 @@ TEST(TestRclcLifecycle, lifecycle_node_callbacks) {
     &lifecycle_node,
     &my_node,
     &state_machine_,
-    &allocator,
-    true);
+    &allocator);
 
   // register callbacks
   rclc_lifecycle_register_on_configure(&lifecycle_node, &callback_mockup_0);

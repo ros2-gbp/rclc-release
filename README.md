@@ -69,6 +69,6 @@ Bloom release status of all packages in repository [github.com/ros2/rclc/](https
 | | Rolling | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_uF64__rclc_lifecycle__ubuntu_focal_amd64__binary)](https://build.ros2.org/job/Rbin_uF64__rclc_lifecycle__ubuntu_focal_amd64__binary/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_ufv8_uFv8__rclc_lifecycle__ubuntu_focal_arm64__binary)](https://build.ros2.org/job/Rbin_ufv8_uFv8__rclc_lifecycle__ubuntu_focal_arm64__binary/) | |
 
 ## Code coverage
-The code coverage is tested with every commit, pull request. Results are available at [codecov](https://app.codecov.io/gh/ros2/rclc/branch/master/).
+The code coverage is tested with every commit, pull request. Results are available at [codecov](https://app.codecov.io/gh/ros2/rclc/branch/foxy/).
 
-[![codecov](https://codecov.io/gh/ros2/rclc/branch/galactic/graph/badge.svg?token=QzyykDh4zF)](https://codecov.io/gh/ros2/rclc)
+[![codecov](https://codecov.io/gh/ros2/rclc/branch/foxy/graph/badge.svg?token=QzyykDh4zF)](https://codecov.io/gh/ros2/rclc)

@@ -2,24 +2,14 @@
 Changelog for package rclc_lifecycle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.0.2 (2021-07-17)
+1.0.2 (2021-07-17)
 ------------------
-* Bumped version
+* Bumped version (tag with version 1.0.1 already exists)
 
-2.0.1 (2021-05-28)
+1.0.1 (2021-07-17)
 ------------------
-* added quality declaration
-
-2.0.0 (2021-04-23)
-------------------
-* added codecov support
-* new API of rcl_lifecycle in Rolling required major version bump
-
-1.0.1 (2021-03-29)
-------------------
-* Windows port
-* Compatibility sleep function (Windows, POSIX-OS)
-* Fixed RCL lifecycle API change for Rolling
+* Added quality declaration statement
+* Added windows compatability
 
 1.0.0 (2021-03-04)
 ------------------
