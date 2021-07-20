@@ -2,9 +2,13 @@
 Changelog for package rclc_lifecycle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.0.1 (2021-07-17)
+2.0.2 (2021-07-17)
 ------------------
-* Added quality declaration statement
+* Bumped version
+
+2.0.1 (2021-05-28)
+------------------
+* added quality declaration
 
 2.0.0 (2021-04-23)
 ------------------

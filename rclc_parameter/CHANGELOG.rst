@@ -2,7 +2,7 @@
 Changelog for package rclc_parameter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.0.1 (2021-07-17)
+2.0.2 (2021-07-17)
 ------------------
 * Removed shared from rclc_parameter
 * Ensure clean message when set_parameter
