@@ -1,10 +1,10 @@
-name: CI RCLC Foxy
+name: CI RCLC Galactic
 
 on:
   push:
-    branches: [ foxy ]
+    branches: [ galactic ]
   pull_request:
-    branches: [ foxy ]
+    branches: [ galactic ]
   schedule:
     # Run once per day to detect broken dependencies.
     - cron: '33 6 * * *'
@@ -17,10 +17,10 @@ jobs:
       matrix:
         # os: [ ubuntu-20.04, windows-latest, macOS-latest ]
         os: [ ubuntu-20.04 ]
-        ros_distribution: [ foxy ]
+        ros_distribution: [ galactic ]
         include:
           - docker_image: ubuntu:focal
-            ros_distribution: foxy
+            ros_distribution: galactic
     container:
       image: ${{ matrix.docker_image }}
     steps:
@@ -34,8 +34,8 @@ jobs:
         apt-get install ros-${{ matrix.ros_distribution }}-test-msgs
     - uses : ros-tooling/action-ros-ci@0.2.1
       with:
-        package-name: "rclc rclc_examples rclc_lifecycle"
-        vcs-repo-file-url: ""
+        package-name: "rclc rclc_examples rclc_lifecycle rclc_parameter"
+        vcs-repo-file-url: dependencies.repos
         target-ros2-distro: ${{ matrix.ros_distribution }}
         colcon-defaults: |
           {
