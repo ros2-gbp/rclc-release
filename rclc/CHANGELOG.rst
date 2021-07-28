@@ -2,29 +2,32 @@
 Changelog for package rclc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.0.3 (2021-07-26)
+3.0.3 (2021-07-28)
+------------------
+* Checking for valid ROS context in spin_some
+* Refactoring executor (removing callback_type)
+* Fixing codecov config
+
+3.0.2 (2021-07-26)
 ------------------
 * Updated codecov to ignore test folders
 * Updated bloom release status table
 
-2.0.2 (2021-07-17)
+3.0.1 (2021-07-17)
 ------------------
 * Added rclc_parameter package
 * Added quality of service entity creation API
-* Addded executor_prepare API
+* Added executor prepare API
 * Added support for removing subscription from executor
 * Added support for subscription with context
+* Added quality declaration statement
 * Updated compatability function for sleep
 * Removed duplicate NOTICE files
 
-2.0.1 (2021-05-28)
-------------------
-* added quality declaration
-
 2.0.0 (2021-04-23)
 ------------------
-* added codecov support
-* new API of rcl_lifecycle in Rolling required major version bump
+* Added codecov support
+* New API of rcl_lifecycle in Rolling required major version bump
 
 1.0.1 (2021-03-29)
 ------------------
@@ -34,10 +37,10 @@ Changelog for package rclc
 
 1.0.0 (2021-03-04)
 ------------------
-* service callbacks with context
-* fixed minor issues unit tests
-* upgraded setup_ros action (ci jobs)
-* removed Eloquent from ci jobs
+* Service callbacks with context
+* Fixed minor issues unit tests
+* Upgraded setup_ros action (ci jobs)
+* Removed Eloquent from ci jobs
 
 0.1.7 (2021-01-20)
 ------------------
