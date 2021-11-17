@@ -1,0 +1,36 @@
+ros-rolling-rclc-parameter (3.0.4-1focal) focal; urgency=high
+
+  * Add rclc_parameter Quality Declaration (#144)
+  * Check all dynamic allocations in parameter server init (#169)
+
+ -- Antonio Cuadros <antoniocuadros@eprosima.com>  Tue, 16 Nov 2021 23:00:00 -0000
+
+ros-rolling-rclc-parameter (3.0.3-1focal) focal; urgency=high
+
+  * Version bump
+
+ -- Antonio Cuadros <antoniocuadros@eprosima.com>  Tue, 27 Jul 2021 22:00:00 -0000
+
+ros-rolling-rclc-parameter (3.0.2-1focal) focal; urgency=high
+
+  * Add test dependencies for rclc_parameter
+
+ -- Antonio Cuadros <antoniocuadros@eprosima.com>  Sun, 25 Jul 2021 22:00:00 -0000
+
+ros-rolling-rclc-parameter (3.0.1-1focal) focal; urgency=high
+
+  * Removed shared from rclc_parameter
+  * Ensure clean message when set_parameter
+  * Added QoS entity creation API
+  * Updated CMakeLists.txt
+  * Major vesion bump was neccessary because API change in rcl_lifecycle package
+
+ -- Antonio Cuadros <antoniocuadros@eprosima.com>  Fri, 16 Jul 2021 22:00:00 -0000
+
+ros-rolling-rclc-parameter (0.1.0-1focal) focal; urgency=high
+
+  * Initial release
+
+ -- Antonio Cuadros <antoniocuadros@eprosima.com>  Wed, 26 May 2021 22:00:00 -0000
+
+
