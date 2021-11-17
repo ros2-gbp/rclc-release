@@ -1,28 +1,26 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package rclc_examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2.0.5 (2021-11-08)
+3.0.4 (2021-11-17)
 ------------------
-* Bumped version
+* added pingpong example (#172)
+* Provide lifecycle services in the rclc lifecycle nodes (#51)
+* RCLC Actions Implementation (#170)
 
-2.0.4 (2021-08-19)
+3.0.3 (2021-07-28)
 ------------------
-* Added pingpong example (example for C++ support)
+* Version bump
 
-2.0.3 (2021-07-26)
+3.0.2 (2021-07-26)
 ------------------
-* Bumped version
+* Version bump
 
-2.0.2 (2021-07-17)
+3.0.1 (2021-07-17)
 ------------------
 * Added example for parameter server
+* Added example for executor prepare API
 * Added example for quality of service entity creation API
 * Added example for subscription with context
-* Added example for executor_prepare API
-
-2.0.1 (2021-05-28)
-------------------
-* added quality declaration
 
 2.0.0 (2021-04-23)
 ------------------
