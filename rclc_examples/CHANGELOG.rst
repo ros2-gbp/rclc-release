@@ -1,44 +1,22 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package rclc_examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-2.0.6 (2022-01-25)
+1.1.0 (2022-01-25)
 ------------------
-* [backport galactic, foxy] data_available optimization (#212)
+* Feature request: check for valid ros context in spin_some (#165) (#167)
+* Ignoring unsuccessful SERVICE_TAKE (#175) (#177)
+* added pingpong example (backport #172) (#187)
+* [backport galactic, foxy] data_available optimization (backport #212) (#213)
 
-2.0.5 (2021-11-08)
+1.0.2 (2021-07-17)
 ------------------
-* Bumped version
+* Bumped version (tag with version 1.0.1 already exists)
 
-2.0.4 (2021-08-19)
+1.0.1 (2021-07-17)
 ------------------
-* Added pingpong example (example for C++ support)
-
-2.0.3 (2021-07-26)
-------------------
-* Bumped version
-
-2.0.2 (2021-07-17)
-------------------
-* Added example for parameter server
 * Added example for quality of service entity creation API
+* Added example for executor prepare API
 * Added example for subscription with context
-* Added example for executor_prepare API
-
-2.0.1 (2021-05-28)
-------------------
-* added quality declaration
-
-2.0.0 (2021-04-23)
-------------------
-* added codecov support
-* new API of rcl_lifecycle in Rolling required major version bump
-
-1.0.1 (2021-03-29)
-------------------
-* Windows port
-* Compatibility sleep function (Windows, POSIX-OS)
-* Fixed RCL lifecycle API change for Rolling
 
 1.0.0 (2021-03-04)
 ------------------
