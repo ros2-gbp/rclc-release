@@ -1,0 +1,12 @@
+Source: ros-foxy-rclc-parameter
+Section: misc
+Priority: optional
+Maintainer: Antonio Cuadros <antoniocuadros@eprosima.com>
+Build-Depends: debhelper (>= 9.0.0), ros-foxy-ament-cmake-gtest, ros-foxy-ament-cmake-pytest, ros-foxy-ament-cmake-ros, ros-foxy-ament-lint-auto, ros-foxy-ament-lint-common, ros-foxy-builtin-interfaces, ros-foxy-example-interfaces, ros-foxy-osrf-testing-tools-cpp, ros-foxy-rcl, ros-foxy-rcl-interfaces, ros-foxy-rclc, ros-foxy-rclcpp, ros-foxy-rcutils, ros-foxy-rosidl-runtime-c, ros-foxy-std-msgs, ros-foxy-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-foxy-rclc-parameter
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-foxy-builtin-interfaces, ros-foxy-rcl, ros-foxy-rcl-interfaces, ros-foxy-rclc, ros-foxy-rcutils, ros-foxy-rosidl-runtime-c, ros-foxy-ros-workspace
+Description: Parameter server implementation for micro-ROS nodes
