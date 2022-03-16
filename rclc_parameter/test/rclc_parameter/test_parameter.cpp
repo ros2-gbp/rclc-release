@@ -20,11 +20,11 @@ extern "C"
 #include <rclc_parameter/rclc_parameter.h>
 }
 
+#include <rclcpp/rclcpp.hpp>
+
 #include <string>
 #include <memory>
 #include <vector>
-
-#include <rclcpp/rclcpp.hpp>
 
 using namespace std::chrono_literals;
 
@@ -253,4 +253,7 @@ TEST(Test, rclc_node_init_default) {
 
   spin = false;
   rclc_parameter_server_thread.join();
+
+  // Destroy parameter server
+  ASSERT_EQ(rclc_parameter_server_fini(&param_server, &node), RCL_RET_OK);
 }

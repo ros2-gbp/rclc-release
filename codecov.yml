@@ -4,4 +4,3 @@ ignore:
   - "rclc/test/**/*"
   - "rclc_examples/**/*"
   - "rclc_lifecycle/test/*"
-  - "rclc_parameter/test/**/*"
