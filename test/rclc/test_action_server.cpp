@@ -284,8 +284,7 @@ TEST_F(ActionServerTest, goal_accept) {
   auto future = promise->get_future().share();
 
   send_goal_options.goal_response_callback =
-    [&](std::shared_future<GoalHandleFibonacci::SharedPtr> future) -> void {
-      auto goal_handle = future.get();
+    [&](GoalHandleFibonacci::SharedPtr goal_handle) -> void {
       ASSERT_NE(nullptr, goal_handle);
       promise->set_value(goal_handle->get_status());
     };
@@ -313,8 +312,7 @@ TEST_F(ActionServerTest, goal_reject) {
   goal_msg.order = 10;
 
   send_goal_options.goal_response_callback =
-    [&](std::shared_future<GoalHandleFibonacci::SharedPtr> future) -> void {
-      auto goal_handle = future.get();
+    [&](GoalHandleFibonacci::SharedPtr goal_handle) -> void {
       ASSERT_EQ(nullptr, goal_handle);
       promise->set_value();
     };
@@ -367,8 +365,7 @@ TEST_F(ActionServerTest, goal_accept_feedback_and_result) {
   bool accepted = false;
 
   send_goal_options.goal_response_callback =
-    [&](std::shared_future<GoalHandleFibonacci::SharedPtr> future) -> void {
-      auto goal_handle = future.get();
+    [&](GoalHandleFibonacci::SharedPtr goal_handle) -> void {
       ASSERT_NE(nullptr, goal_handle);
       accepted = true;
     };
@@ -439,8 +436,7 @@ TEST_F(ActionServerTest, goal_accept_feedback_and_abort) {
   bool accepted = false;
 
   send_goal_options.goal_response_callback =
-    [&](std::shared_future<GoalHandleFibonacci::SharedPtr> future) -> void {
-      auto goal_handle = future.get();
+    [&](GoalHandleFibonacci::SharedPtr goal_handle) -> void {
       ASSERT_NE(nullptr, goal_handle);
       accepted = true;
     };
@@ -514,8 +510,7 @@ TEST_F(ActionServerTest, goal_accept_cancel_success) {
 
   bool accepted = false;
   send_goal_options.goal_response_callback =
-    [&](std::shared_future<GoalHandleFibonacci::SharedPtr> future) -> void {
-      auto goal_handle = future.get();
+    [&](GoalHandleFibonacci::SharedPtr goal_handle) -> void {
       ASSERT_NE(nullptr, goal_handle);
       accepted = true;
     };
@@ -572,8 +567,7 @@ TEST_F(ActionServerTest, goal_accept_cancel_reject) {
 
   bool accepted = false;
   send_goal_options.goal_response_callback =
-    [&](std::shared_future<GoalHandleFibonacci::SharedPtr> future) -> void {
-      auto goal_handle = future.get();
+    [&](GoalHandleFibonacci::SharedPtr goal_handle) -> void {
       ASSERT_NE(nullptr, goal_handle);
       accepted = true;
     };
@@ -646,8 +640,7 @@ TEST_F(ActionServerTest, multi_goal_accept_feedback_and_result) {
   std::map<rclcpp_action::GoalUUID, bool> goals_accepted;
 
   send_goal_options.goal_response_callback =
-    [&](std::shared_future<GoalHandleFibonacci::SharedPtr> future) -> void {
-      auto goal_handle = future.get();
+    [&](GoalHandleFibonacci::SharedPtr goal_handle) -> void {
       ASSERT_NE(nullptr, goal_handle);
       goals_accepted[goal_handle->get_goal_id()] = true;
     };
@@ -704,6 +697,53 @@ TEST_F(ActionServerTest, multi_goal_accept_feedback_and_result) {
 
   ASSERT_EQ(feedback_received, num_goals * feedback_per_goal);
   ASSERT_EQ(goals.size(), 0U);
+}
+
+TEST(Test, rclc_action_server_regression_1) {
+  rclc_support_t support;
+  rcl_node_t node;
+  rcl_ret_t rc;
+
+  rcl_allocator_t allocator = rcl_get_default_allocator();
+  rc = rclc_support_init(&support, 0, nullptr, &allocator);
+  rc = rclc_node_init_default(&node, "my_node", "my_namespace", &support);
+  EXPECT_EQ(RCL_RET_OK, rc);
+
+  rclc_action_server_t action_server;
+  rc = rclc_action_server_init_default(
+    &action_server,
+    &node,
+    &support,
+    ROSIDL_GET_ACTION_TYPE_SUPPORT(example_interfaces, Fibonacci),
+    "fibonacci"
+  );
+  EXPECT_EQ(RCL_RET_OK, rc);
+
+  rclc_executor_t executor;
+  rclc_executor_init(&executor, &support.context, 1, &allocator);
+
+  example_interfaces__action__Fibonacci_SendGoal_Request ros_goal_request[RCLC_MAX_GOALS];
+
+  rc = rclc_executor_add_action_server(
+    &executor,
+    &action_server,
+    RCLC_MAX_GOALS,
+    ros_goal_request,
+    sizeof(example_interfaces__action__Fibonacci_SendGoal_Request),
+    [](rclc_action_goal_handle_t * /* goal_handle */, void * /* context */) -> rcl_ret_t {
+      return RCL_RET_ACTION_GOAL_REJECTED;
+    },
+    [](rclc_action_goal_handle_t * /* goal_handle */, void * /* context */) -> bool {
+      return false;
+    },
+    &action_server);
+
+  EXPECT_EQ(RCL_RET_OK, rc);
+
+  EXPECT_EQ(RCL_RET_OK, rclc_action_server_fini(&action_server, &node));
+
+  // Second time should be safe
+  EXPECT_EQ(RCL_RET_OK, rclc_action_server_fini(&action_server, &node));
 }
 
 int main(int args, char ** argv)
