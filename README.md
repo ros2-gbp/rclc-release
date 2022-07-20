@@ -1,208 +1,81 @@
-General information about this repository, including legal information, build instructions and known issues/limitations, are given in [README.md](../README.md) in the repository root.
+# The rclc repository
+This repository provides the rclc package, which complements the [ROS Client Support Library (rcl)](https://github.com/ros2/rcl/) to make up a complete ROS 2 client library for the C programming language. That is, rclc does not add a new layer of types on top of rcl (like rclcpp and rclpy do) but only provides convenience functions that ease the programming with the rcl types. New types are introduced only for concepts that are missing in rcl, most important an Executor, Lifecycle Node and the Parameter server.
 
-# The rclc_examples package
+In detail, this repository contains four packages:
 
-The rclc_examples package provides examples for using the RCLC-Exector and convenience functions.
-- [example_executor.c](src/example_executor.c) provides the example for the RCLC-Executor. It creates one publisher and one subscriber and configures the RCLC-Executor accordingly. Then the spin_some() function is demonstrated.
-- [example_executor_convenience.c](src/example_executor_convenience.c) provides the example for the RCLC-Executor with the convenience functions from rclc. It creates one publisher and one subscriber and configures the RCLC-Executor accordingly. Then the spin_some() function is demonstrated.
-- [example_executor_trigger.c](src/example_executor_trigger.c) demonstrates the trigger condition of the RCLC-Executor.
-- [example_service_node.c](src/example_service_node.c) implements a service node with the RCLC-Executor.
-- [example_client_node.c](src/example_client_node.c) implements a client node with RCLC-Executor.
+- [rclc](rclc/) provides the mentioned convenience functions for creating instances of publishers, subscriptions, nodes, etc. with the corresponding [rcl types](https://github.com/ros2/rcl/tree/master/rcl/include/rcl). Furthermore, it provides the rclc Executor for C, analogously to rclcpp's [Executor class](https://github.com/ros2/rclcpp/blob/master/rclcpp/include/rclcpp/executor.hpp) for C++. A key feature compared to the rclcpp Executor is that it includes features for implementing deterministic timing behavior.
+- [rclc_lifecycle](rclc_lifecycle/) introduces an rclc Lifecycle Node, bundling an rcl Node and the [lifecycle state machine](http://design.ros2.org/articles/node_lifecycle.html) from the [rcl_lifecycle package](https://github.com/ros2/rcl/tree/master/rcl_lifecycle).
+- [rclc_examples](rclc_examples/) provides small examples for the use of the convenience functions and the rclc Executor, as well as a small example for the use of the rclc Lifecycle Node.
+- [rclc_parameter](rclc_parameter/) provides convenience functions for creating parameter server instances with full ROS2 parameters client compatibility.
 
-The reduction of code lines for configuring the necessary RCL objects for RCLC-Executor directly with RCL objects compared to using the convenience functions is about 24%:
-- example_executor.c: 92 LoC (lines 56-148)
-- example_executor_convenience.c: 70 LoC (line 17 + lines 57-126)
+Technical information on the interfaces and the usage of these packages is given in the README.md files in the corresponding subfolders.
 
- counting only the lines of code in which the RCL objects are defined).
+The quality declarations for the packages are avaiable in QUALITY_DECLARATION.md files in the corresponding subfolders.
 
-## Example RCLC-Executor using RCL objects directly
-**Step 1** Setup ROS 2 Workspace
+## Purpose of the project
 
-Open a terminal with ROS 2 workspace. Assuming that the ROS 2 installation resides in `/opt/ros/ROSDISTRO`, setup the ROS2 environment by:
+The software is not ready for production use. It has neither been developed nor tested for a specific use case. However, the license conditions of the applicable Open Source licenses allow you to adapt the software to your needs. Before using it in a safety relevant setting, make sure that the software fulfills your requirements and adjust it according to any applicable safety standards (e.g. ISO 26262).
+
+## Requirements, how to build, test and install
+
+Source your ROS2 `distribution` with `source /opt/ros/distribution/setup.bash`. This will setup the environment variable `$ROS-DISTRO`.
+Clone the repository into a ROS2 workspace (e.g. `~/ros2_ws/`) and build the packages using `colcon build` from the [Colcon Command Line Tools](https://colcon.readthedocs.io/en/released/). To test the RCLC package run `colcon test` or if you have multiple repositories in this workspace `colcon test --packages-select rclc`. For correct installation of the `rclc`-package do a `source ~/ros2_ws/install/local_setup.bash`. Then you are ready to run the examples in the `rclc_examples` package.
+
+The following repositories might not be in the default ROS 2 distribution: osrf_testing_tools_cpp and test_msgs. In this case install them manually:
+
 ```C
-~$ source /opt/ros/$ROSDISTRO/setup.bash
+ sudo apt-get install ros-$ROS_DISTRO-osrf-testing-tools-cpp
+ sudo apt-get install ros-$ROS_DISTRO-test-msgs
 ```
 
-**Step 2** Build the package
-Download and build the the packages `rclc` and `rclc_examples` in a workspace (for example `ros2_ws`). Then source the workspace:
-```C
-~/ros2_ws/$ colcon build --packages-up-to rclc_examples
-~/ros2_ws/$ source ./install/local_setup.bash
-```
-It should build these packages:
-- rcl_yaml_param_parser
-- rcl
-- rclc
-- rclc_examples
+## License
 
+rclc is open-sourced under the Apache-2.0 license. See the [LICENSE](LICENSE) file for details.
 
-**Step 3** Run the example executor.
+For a list of other open source components included in rclc, see the file [3rd-party-licenses.txt](3rd-party-licenses.txt).
 
-The binary of the example is `example_executor`.
+## Quality assurance
 
-```C
-~/ros2_ws/$ ros2 run rclc_examples  example_executor
-```
-The publisher publishes the message `Hello World!`in `topic_0` at a rate of 1Hz and the subscriber prints out in the callback `Callback: I heard: Hello World!`.
+*   Coding style:
+    *   The [uncrustify](https://github.com/uncrustify/uncrustify) tool is used to check the coding style.
+*   Linters:
+    *   The [cpplint](https://github.com/google/styleguide/tree/gh-pages/cpplint) tool is used to detect common flaws and problems in C/C++ code.
+    * The [cppcheck](http://cppcheck.sourceforge.net/) tool is used for code analysis.
+    *   The CMakeLists.txt is checked with [lint_cmake](https://pypi.org/project/cmakelint/) and the package.xml with [xmllint](http://xmlsoft.org/xmllint.html)
+*   Unit tests:
+    *   Unit tests based on [gtest](https://github.com/google/googletest) are located in the [rclc/test](rclc/test) folder.
 
-You should see the following output:
+## Known issues/limitations
 
-```C
-Created timer with timeout 1000 ms.
-Created subscriber topic_0:
-Debug: number of DDS handles: 2
-Published message Hello World!
-Callback: I heard: Hello World!
-Published message Hello World!
-Callback: I heard: Hello World!
-Published message Hello World!
-Callback: I heard: Hello World!
-Published message Hello World!
-Callback: I heard: Hello World!
-Published message Hello World!
-Callback: I heard: Hello World!
-```
+Please notice the following issues/limitations:
 
+*   The rclc executor is single-threaded. You cannot create nodes in multiple threads and manage the corresponding subscriptions/services/etc. by one executor.
 
+## Bloom Release Status of Code Repository ros2/rclc
 
-## Example RCLC-Executor with convenience functions
-**Step 1** Setup ROS 2 Workspace
+Bloom release status of rclc packages in [github.com/ros2/rclc/](https://github.com/ros2/rclc) for amd64 and arm64 architectures and ROS 2 distributions Foxy, Galactic and Rolling.
 
-Open a terminal with ROS 2 workspace. Assuming that the ROS 2 installation resides in `/opt/ros/eloquent`, setup
-the ROS2 environment by:
-```C
-~$ source /opt/ros/eloquent/setup.bash
-```
+|Package | Release | amd64 | arm64 | 
+|:--     |  :--    |  :--  |  :--  | 
+| [rclc](https://github.com/ros2/rclc/tree/master/rclc) | Foxy | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Fpr__rclc__ubuntu_focal_amd64)](https://build.ros2.org/job/Fpr__rclc__ubuntu_focal_amd64/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Fbin_ubv8_uFv8__rclc__ubuntu_focal_arm64__binary)](https://build.ros2.org/job/Fbin_ubv8_uFv8__rclc__ubuntu_focal_arm64__binary/) | 
+| | Galactic | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Gpr__rclc__ubuntu_focal_amd64)](https://build.ros2.org/job/Gpr__rclc__ubuntu_focal_amd64/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Gbin_ufv8_uFv8__rclc__ubuntu_focal_arm64__binary)](https://build.ros2.org/job/Gbin_ufv8_uFv8__rclc__ubuntu_focal_arm64__binary/) | 
+| | Rolling| [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rpr__rclc__ubuntu_jammy_amd64)](https://build.ros2.org/job/Rpr__rclc__ubuntu_jammy_amd64/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_ujv8_uJv8__rclc__ubuntu_jammy_arm64__binary)](https://build.ros2.org/job/Rbin_ujv8_uJv8__rclc__ubuntu_jammy_arm64__binary/) |
+|     |     |   |   |    
+| [rclc_examples](https://github.com/ros2/rclc/tree/master/rclc_examples)  
+| | Foxy | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Fbin_uF64__rclc_examples__ubuntu_focal_amd64__binary)](https://build.ros2.org/job/Fbin_uF64__rclc_examples__ubuntu_focal_amd64__binary/)  | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Fbin_ubv8_uFv8__rclc_examples__ubuntu_focal_arm64__binary)](https://build.ros2.org/job/Fbin_ubv8_uFv8__rclc_examples__ubuntu_focal_arm64__binary/) | 
+| | Galactic | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Gbin_uF64__rclc_examples__ubuntu_focal_amd64__binary)](https://build.ros2.org/job/Gbin_uF64__rclc_examples__ubuntu_focal_amd64__binary/) |  [![Build Status](https://build.ros2.org/buildStatus/icon?job=Gbin_ufv8_uFv8__rclc_examples__ubuntu_focal_arm64__binary)](https://build.ros2.org/job/Gbin_ufv8_uFv8__rclc_examples__ubuntu_focal_arm64__binary/) | 
+| | Rolling| [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_uJ64__rclc_examples__ubuntu_jammy_amd64__binary)](https://build.ros2.org/job/Rbin_uJ64__rclc_examples__ubuntu_jammy_amd64__binary/) |  [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_ujv8_uJv8__rclc_examples__ubuntu_jammy_arm64__binary)](https://build.ros2.org/job/Rbin_ujv8_uJv8__rclc_examples__ubuntu_jammy_arm64__binary/) | 
+|     |     |   |   |    
+| [rclc_lifecycle](https://github.com/ros2/rclc/tree/master/rclc_lifecycle) 
+| | Foxy | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Fbin_uF64__rclc_lifecycle__ubuntu_focal_amd64__binary)](https://build.ros2.org/job/Fbin_uF64__rclc_lifecycle__ubuntu_focal_amd64__binary/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Fbin_ubv8_uFv8__rclc_lifecycle__ubuntu_focal_arm64__binary)](https://build.ros2.org/job/Fbin_ubv8_uFv8__rclc_lifecycle__ubuntu_focal_arm64__binary/) | 
+| | Galactic | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Gbin_uF64__rclc_lifecycle__ubuntu_focal_amd64__binary)](https://build.ros2.org/job/Gbin_uF64__rclc_lifecycle__ubuntu_focal_amd64__binary/) |  [![Build Status](https://build.ros2.org/buildStatus/icon?job=Gbin_ufv8_uFv8__rclc_lifecycle__ubuntu_focal_arm64__binary)](https://build.ros2.org/job/Gbin_ufv8_uFv8__rclc_lifecycle__ubuntu_focal_arm64__binary/) |
+| | Rolling | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_uJ64__rclc_lifecycle__ubuntu_jammy_amd64__binary)](https://build.ros2.org/job/Rbin_uJ64__rclc_lifecycle__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_ujv8_uJv8__rclc_lifecycle__ubuntu_jammy_arm64__binary)](https://build.ros2.org/job/Rbin_ujv8_uJv8__rclc_lifecycle__ubuntu_jammy_arm64__binary/) | 
+|     |     |   |   |    
+| [rclc_parameter](https://github.com/ros2/rclc/tree/master/rclc_parameter) 
+| | Galactic | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Gbin_uF64__rclc_parameter__ubuntu_focal_amd64__binary)](https://build.ros2.org/job/Gbin_uF64__rclc_parameter__ubuntu_focal_amd64__binary/) |  [![Build Status](https://build.ros2.org/buildStatus/icon?job=Gbin_ufv8_uFv8__rclc_parameter__ubuntu_focal_arm64__binary)](https://build.ros2.org/job/Gbin_ufv8_uFv8__rclc_parameter__ubuntu_focal_arm64__binary/) |
+| | Rolling | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_uJ64__rclc_parameter__ubuntu_jammy_amd64__binary)](https://build.ros2.org/job/Rbin_uJ64__rclc_parameter__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_ujv8_uJv8__rclc_parameter__ubuntu_jammy_arm64__binary)](https://build.ros2.org/job/Rbin_ujv8_uJv8__rclc_parameter__ubuntu_jammy_arm64__binary/)
 
-**Step 2** Build the package
-Download and build the the packages `rclc` and `rclc_examples` in a workspace (for example `ros2_ws`). Then source the workspace:
-```C
-~/ros2_ws/$ colcon build --packages-up-to rclc_examples
-~/ros2_ws/$ source ./install/local_setup.bash
-```
-It should build these packages:
-- rcl_yaml_param_parser
-- rcl
-- rclc
-- rclc_examples
+## Code coverage
+The code coverage is tested with every commit, pull request. Results are available at [codecov](https://app.codecov.io/gh/ros2/rclc/branch/master/).
 
-**Step 3** Run the example executor with the convenience functions from the package rclc.
-
-The binary of the example is `example_executor_convenience`.
-
-```C
-~/ros2_ws/$ ros2 run rclc_examples  example_executor_convenience
-```
-The same setup as in the example_executor, just using the RCLC convenience functions. You should see the exact same output:
-
-```C
-Created timer with timeout 1000 ms.
-Created subscriber topic_0:
-Debug: number of DDS handles: 2
-Published message Hello World!
-Callback: I heard: Hello World!
-Published message Hello World!
-Callback: I heard: Hello World!
-Published message Hello World!
-Callback: I heard: Hello World!
-Published message Hello World!
-Callback: I heard: Hello World!
-Published message Hello World!
-Callback: I heard: Hello World!
-```
-
-## Example RCLC-Executor with trigger function
-
-**Step 1, Step 2**
-To setup ROS2 workspace and build the package refer to Step 1 and Step 2 in the [Example RCLC-Executor](#example-rclc-executor).
-
-**Step 3**
-This example implements two RCLC Executors, one for publishing `executor_pub`and one for subscribing messages `executor_sub`.
-
-The Executor `executor_pub` publishes string `topic_0` every 100ms (using a timer with 100ms) and an integer `topic_1` every 1000ms (using a timer with 1000ms).
-
-With the trigger condition `rclc_executor_trigger_any` this executor publishes whenenver any timer is ready.
-
-Executor `executor_sub` has two subscriptions, `my_string_sub` and `my_int_sub` subscribing to `topic_0` and `topic_1`, respectivly.
-
-With the trigger condition `rclc_executor_trigger_all` this executor starts evaluating the callbacks only when both messages have arrived. To make this clearly visible, we set the quality of service parameter of the length of the DDS-queue to 0 for subscription `my_string_sub`, which subscribes to `topic_0` with the higher rate.
-
-```C
-my_subscription_options.qos.depth = 0
-rc = rcl_subscription_init(
-  &my_string_sub,
-  &my_node,
-  my_type_support,
-  topic_name,
-  &my_subscription_options);
-```
-
-Consequently, the messages "in between" are lost.
-
-The binary of the example is `example_executor_trigger`. You run the example with:
-```C
-~/ros2_ws/$ ros2 run rclc_examples  example_executor_trigger
-```
- Then you should see the following output:
-
-```C
-Created timer 'my_string_timer' with timeout 100 ms.
-Created 'my_int_timer' with timeout 1000 ms.
-Created subscriber topic_0:
-Created subscriber topic_1:
-Executor_pub: number of DDS handles: 2
-Executor_sub: number of DDS handles: 2
-Published: Hello World! 0
-Published: Hello World! 1
-Published: Hello World! 2
-Published: Hello World! 3
-Published: Hello World! 4
-Published: Hello World! 5
-Published: Hello World! 6
-Published: Hello World! 7
-Published: Hello World! 8
-Published: Hello World! 9
-Published: 0
-Callback 1: Hello World! 9  <---
-Callback 2: 0               <---
-Published: Hello World! 10
-Published: Hello World! 11
-Published: Hello World! 12
-Published: Hello World! 13
-Published: Hello World! 14
-Published: Hello World! 15
-Published: Hello World! 16
-Published: Hello World! 17
-Published: Hello World! 18
-Published: Hello World! 19
-Published: 1
-Callback 1: Hello World! 19 <---
-Callback 2: 1               <---
-```
-The results show, that the callbacks are triggered together, only when the integer message `topic_1` was published and received. At that moment the current string message of the `topic_0` is processed as well.
-
-## Example Service/client with RCLC-Executor
-
-**Step 1, Step 2**
-To setup ROS2 workspace and build the package refer to Step 1 and Step 2 in the [Example RCLC-Executor](#example-rclc-executor).
-
-**Step 3**
-Open two Terminal windows and source the ROS 2 distribution/install/setup.bash and rclc repository/install/local_setup.bash.
-
-window 1: start service node
-```C
-$ ros2 run rclc_examples example_service_node
-INFO: rcl_wait timeout 10 ms
-Service request value: 24 + 42. Seq 1
-Received service response 24 + 42 = 66. Seq 1
-```C
-
-window 2: start client node
-```C
-~$ ros2 run rclc_examples example_client_node
-Send service request 24 + 42. Seq 1
-INFO: rcl_wait timeout 10 ms
-```C
-
-A request message is sent from the client node to the service node and answered.
-
+[![codecov](https://codecov.io/gh/ros2/rclc/branch/master/graph/badge.svg?token=QzyykDh4zF)](https://codecov.io/gh/ros2/rclc)
