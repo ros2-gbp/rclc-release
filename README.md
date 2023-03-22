@@ -1,3 +1,30 @@
+## rclc (humble) - 4.0.2-2
+
+The packages in the `rclc` repository were released into the `humble` distro by running `/usr/bin/bloom-release --rosdistro humble --track humble rclc` on `Wed, 22 Mar 2023 17:17:07 -0000`
+
+These packages were released:
+- `rclc`
+- `rclc_examples`
+- `rclc_lifecycle`
+- `rclc_parameter`
+
+Version of package(s) in repository `rclc`:
+
+- upstream repository: https://github.com/ros2/rclc.git
+- release repository: https://github.com/ros2-gbp/rclc-release.git
+- rosdistro version: `4.0.1-1`
+- old version: `4.0.2-1`
+- new version: `4.0.2-2`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `0.5.2`
+- rosdep version: `0.22.2`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## rclc (humble) - 4.0.2-1
 
 The packages in the `rclc` repository were released into the `humble` distro by running `/usr/bin/bloom-release --rosdistro humble --track humble rclc` on `Wed, 22 Mar 2023 17:06:18 -0000`
