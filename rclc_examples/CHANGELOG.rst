@@ -2,20 +2,12 @@
 Changelog for package rclc_examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.0.2 (2023-03-22)
+3.0.9 (2023-03-22)
 ------------------
-* Example real-time concurreny timer and subscription (#329) (#330)
-* Updated documentation (#332) (#334)
-* Updating README: updated table of contents and adding missing examples. (#335) (#336)
-* Added documentation about number_of_handles in all examples. (#341) (#342)
-
-4.0.1 (2022-07-20)
-------------------
-* no changes
-
-4.0.0 (2022-04-28)
-------------------
-* updated version for Humble release
+* Example real-time concurreny timer and subscription (#329)
+* Updated documentation (#332)
+* Updating README: updated table of contents and adding missing examples. (#335)
+* Added documentation about number_of_handles in all examples. (#341)
 
 3.0.8 (2022-04-14)
 ------------------
