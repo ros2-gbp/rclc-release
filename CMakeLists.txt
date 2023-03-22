@@ -33,8 +33,8 @@ include_directories(include)
 add_executable(example_executor src/example_executor.c)
 ament_target_dependencies(example_executor rcl rclc std_msgs)
 
-add_executable(example_executor_convenience src/example_executor_convenience.c)
-ament_target_dependencies(example_executor_convenience rcl rclc std_msgs)
+add_executable(example_executor_only_rcl src/example_executor_only_rcl.c)
+ament_target_dependencies(example_executor_only_rcl rcl rclc std_msgs)
 
 add_executable(example_executor_trigger src/example_executor_trigger.c)
 ament_target_dependencies(example_executor_trigger rcl rclc std_msgs)
@@ -64,9 +64,12 @@ ament_target_dependencies(example_action_server rcl rcl_action rclc example_inte
 add_executable(example_action_client src/example_action_client.c)
 ament_target_dependencies(example_action_client rcl rcl_action rclc example_interfaces)
 
+add_executable(example_short_timer_long_subscription src/example_short_timer_long_subscription.c)
+ament_target_dependencies(example_short_timer_long_subscription rcl rclc std_msgs)
+
 install(TARGETS
   example_executor
-  example_executor_convenience
+  example_executor_only_rcl
   example_executor_trigger
   example_lifecycle_node
   example_service_node
@@ -76,6 +79,7 @@ install(TARGETS
   example_pingpong
   example_action_server
   example_action_client
+  example_short_timer_long_subscription
   DESTINATION lib/${PROJECT_NAME}
 )
 
