@@ -10,9 +10,7 @@ The rclc_examples package provides examples for using the RCLC-Exector and conve
 - [Minimal publisher-subscriber only with RCL-API](#minimal-publisher-subscriber-only-with-rcl-api)
 - [RCLC-Executor with trigger function](#rclc-executor-with-trigger-function)
 - [Service and client node](#service-and-client-node)
-- [Action server and client](#action-server-and-client)
 - [Lifecycle node](#lifecycle-node)
-- [Parameter server](#parameter-server)
 - [Subscription callback with C++ class method](#subscription-callback-with-c++-class-method)
 - [Subscription with context](#subscription-with-context)
 - [Real-time concurrency with slow timer and long subscription](#real-time-concurrency-with-slow-timer-and-long-subscription)
@@ -75,12 +73,6 @@ Download the rclc repository in a workspace (for example `ros2_ws`). Then source
 ~/ros2_ws/$ colcon build --packages-up-to rclc_examples
 ~/ros2_ws/$ source ./install/local_setup.bash
 ```
-It should build these packages:
-- rcl_yaml_param_parser
-- rcl
-- rclc
-- rclc_examples
-
 
 **Step 3** Run the example executor.
 
@@ -206,15 +198,8 @@ INFO: rcl_wait timeout 10 ms
 
 A request message is sent from the client node to the service node and answered.
 
-
-## Action server and client
-The files [example_action_client.c](src/example_action_client.c) and [example_action_server.c](src/example_action_server.c) demonstrate the action client and action server functionality in micro-ROS.
-
 ## Lifecycle node
 The file [example_lifecycle_node.c](src/example_lifecycle_node.c)  demonstrates the lifecycle node functionality in micro-ROS.
-
-## Parameter server
-The file [example_parameter_server.c](src/example_parameter_server.c)  demonstrates the parameter server functionality in micro-ROS.
 
 ## Subscription callback with C++ class method
 The files [example_pingpong.cpp](src/example_pingpong.cpp), [example_pingpong_helper.h](src/example_pingpong_helper.h), [example_pingpong_helper.c](src/example_pingpong_helper.c) implement a ping-pong demo using a method of a C++ class as subscription callback.

@@ -32,9 +32,6 @@ extern "C"
 #include "rclc/sleep.h"
 #include "rclc/visibility_control.h"
 
-#include "rclc/action_client.h"
-#include "rclc/action_server.h"
-
 /*! \file executor.h
     \brief The RCLC-Executor provides an Executor based on RCL in which all callbacks are
     processed in a user-defined order.
@@ -130,7 +127,7 @@ rclc_executor_get_zero_initialized_executor(void);
  * Uses Atomics       | No
  * Lock-Free          | Yes
  *
- * \param[inout] executor preallocated rclc_executor_t
+ * \param[inout] e preallocated rclc_executor_t
  * \param[in] context RCL context
  * \param[in] number_of_handles is the total number of subscriptions, timers, services,
  *  clients and guard conditions. Do not include the number of nodes and publishers.
@@ -401,85 +398,6 @@ rclc_executor_add_service(
   rclc_service_callback_t callback);
 
 /**
- *  Adds an action client to an executor.
- *  An error is returned if {@link rclc_executor_t.handles} array is full.
- *  The total number_of_action_clients field of {@link rclc_executor_t.info}
- *  is incremented by one.
- *
- * <hr>
- * Attribute          | Adherence
- * ------------------ | -------------
- * Allocates Memory   | No
- * Thread-Safe        | No
- * Uses Atomics       | No
- * Lock-Free          | Yes
- *
- * \param [inout] executor pointer to initialized executor
- * \param [in] action_client pointer to a allocated and initialized action client
- * \param [in] handles_number max number of goals to handle with the client
- * \param [in] ros_result_response type-erased ptr to an allocated ROS result message
- * \param [in] ros_feedback type-erased ptr to an allocated ROS feedback message
- * \param [in] goal_callback function pointer to a goal callback
- * \param [in] feedback_callback function pointer to a feedback callback
- * \param [in] result_callback function pointer to a result callback
- * \param [in] cancel_callback function pointer to a result cancel callback
- * \param [in] context context to pass to the callback functions
- * \return `RCL_RET_OK` if add-operation was successful
- * \return `RCL_RET_INVALID_ARGUMENT` if any parameter is a null pointer
- * \return `RCL_RET_ERROR` if any other error occured
- */
-rcl_ret_t
-rclc_executor_add_action_client(
-  rclc_executor_t * executor,
-  rclc_action_client_t * action_client,
-  size_t handles_number,
-  void * ros_result_response,
-  void * ros_feedback,
-  rclc_action_client_goal_callback_t goal_callback,
-  rclc_action_client_feedback_callback_t feedback_callback,
-  rclc_action_client_result_callback_t result_callback,
-  rclc_action_client_cancel_callback_t cancel_callback,
-  void * context);
-
-/**
- *  Adds an action server to an executor.
- * * An error is returned if {@link rclc_executor_t.handles} array is full.
- * * The total number_of_action_servers field of {@link rclc_executor_t.info}
- *   is incremented by one.
- *
- * <hr>
- * Attribute          | Adherence
- * ------------------ | -------------
- * Allocates Memory   | No
- * Thread-Safe        | No
- * Uses Atomics       | No
- * Lock-Free          | Yes
- *
- * \param [inout] executor pointer to initialized executor
- * \param [in] action_server pointer to a allocated and initialized action server
- * \param [in] handles_number max number of goals to handle with the server
- * \param [in] ros_goal_request type-erased ptr to an allocated ROS goal request message
- * \param [in] ros_goal_request_size size of the ROS goal request message type
- * \param [in] goal_callback    function pointer to a goal request callback
- * \param [in] cancel_callback    function pointer to a cancel request callback
- * \param [in] context context to pass to the callback functions
- * \return `RCL_RET_OK` if add-operation was successful
- * \return `RCL_RET_INVALID_ARGUMENT` if any parameter is a null pointer
- * \return `RCL_RET_ERROR` if any other error occured
- */
-
-rcl_ret_t
-rclc_executor_add_action_server(
-  rclc_executor_t * executor,
-  rclc_action_server_t * action_server,
-  size_t handles_number,
-  void * ros_goal_request,
-  size_t ros_goal_request_size,
-  rclc_action_server_handle_goal_callback_t goal_callback,
-  rclc_action_server_handle_cancel_callback_t cancel_callback,
-  void * context);
-
-/**
  *  Adds a service to an executor.
  * * An error is returned if {@link rclc_executor_t.handles} array is full.
  * * The total number_of_services field of {@link rclc_executor_t.info}
@@ -738,7 +656,7 @@ rclc_executor_prepare(
   rclc_executor_t * executor);
 
 /**
- *  The spin_some function checks one-time for new data from the DDS-queue.
+ *  The spin-some function checks one-time for new data from the DDS-queue.
  * * the timeout is defined in {@link rclc_executor_t.timeout_ns} and can
  *   be set by calling {@link rclc_executor_set_timeout()} function (default value is 100ms)
  *
@@ -775,7 +693,7 @@ rclc_executor_spin_some(
 
 /**
  *  The spin function checks for new data at DDS queue as long as ros context is available.
- *  It calls {@link rclc_executor_spin_some()} as long as rcl_context_is_valid() returns true.
+ *  It calls {@link rclc_executor_spin_some()} as long as rcl_is_context_is_valid() returns true.
  *
  *  Memory is dynamically allocated within rcl-layer, when DDS queue is accessed with rcl_wait_set_init()
  *  (in spin_some function)
@@ -801,7 +719,7 @@ rclc_executor_spin(rclc_executor_t * executor);
 /**
  *  The spin_period function checks for new data at DDS queue as long as ros context is available.
  *  It is called every period nanoseconds.
- *  It calls {@link rclc_executor_spin_some()} as long as rcl_context_is_valid() returns true.
+ *  It calls {@link rclc_executor_spin_some()} as long as rcl_is_context_is_valid() returns true.
  *
  *  Memory is dynamically allocated within rcl-layer, when DDS queue is accessed with rcl_wait_set_init()
  *  (in spin_some function)

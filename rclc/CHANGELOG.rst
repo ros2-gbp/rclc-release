@@ -2,87 +2,52 @@
 Changelog for package rclc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.0.9 (2023-03-22)
+1.1.2 (2023-03-31)
 ------------------
-* Added build status of bloom-releases for Humble distribution (#291)
-* [rolling] updated ros-tooling versions (#289)
-* github action: updated os-version to ubuntu-22.04 (backport #295) (#296)
-* Added documentation (#301)
-* Drop build dependency on std_msgs (#314)
-* Updated ros-tooling/setup-ros@0.4.2 and ros-tooling/action-ros-ci@0.2.7 (#318)
-* Removed build status for Galactic in README (EOL November 2022) (#321)
-* Update documentation about number_of_handles (#326)
-* executor.h: Fix a few docs typos (#338)
+* Added build status of bloom-releases for Humble distribution (backport #291) (#294)
+* [rolling] updated ros-tooling versions (backport #289) (#299)
+* added documentation (#301) (#304)
+* Drop build dependency on std_msgs (backport #314) (#317)
+* Updated ros-tooling versions (backport #318) (#319)
+* removed build status for Galactic distribution in README (backport #321) (#323)
+* Update documentation about number_of_handles (#326) (#328)
 
-3.0.8 (2022-04-14)
+1.1.1 (2022-03-16)
 ------------------
-* Remove duplicate typedefs. (#249)
-* Add rmw dependencies due to EventsExecutor PR in rcl (#255)
-* Fix action client & server deallocation (#257)
-* updated documentation: build status for Rolling (#266)
-* Update action client goal callback signature (#282)
-* Upgrade parameters (#274)
-
-3.0.7 (2022-02-17)
-------------------
-* Fix enum naming for avoid collision (#242)
-* Added dependency for package performance-test-fixture (#245)
-
-3.0.6 (2022-01-25)
-------------------
-* executor ignore canceled timers (#220)
-* uddated documentation README.md (#229)
-* resolved error in unit test see issue #230 (#231)
-* Add thread dependency to examples (Rolling) (#237) (resolves in this package only cpplint errors)
-
-3.0.5 (2021-11-23)
-------------------
-* Fix data_available reset for timer (backport #215) (#217)
-
-3.0.4 (2021-11-17)
-------------------
-* Ignoring unsuccessful SERVICE_TAKE (#175)
-* Add rclc_parameter Quality Declaration (#144)
-* use-ros2-testing (#185)
-* Fix: printf in executor spin (#195)
-* Fix init options handling (#202) (#205)
-* Remove init options from support (#203)
-* RCLC Actions Implementation (#170)
-* Add rcl_action as build export dependency (#211)
+* Fix enum naming for avoid collision (backport #242) (#243)
+* Backport parameters (#263)
 
 
-3.0.3 (2021-07-28)
+1.1.0 (2022-01-25)
 ------------------
-* Checking for valid ROS context in spin_some
-* Refactoring executor (removing callback_type)
-* Fixing codecov config
+* Update codecov to ignore rclc_examples and all test folders (backport #145) (#150)
+* Updated table of bloom releases (removed dashing, inserted galactic) (backport #147) (#152)
+* Refactor #116 remove callback_type (#154)
+* Fix codecov to ignore unit tests and rclc_examples package (backport #155) (#162)
+* Feature request: check for valid ros context in spin_some (#165) (#167)
+* Ignoring unsuccessful SERVICE_TAKE (#175) (#177)
+* Backport windows port of PR #144 (#182)
+* Fix: printf in executor spin (#195) (#197)
+* Fix init options handling (#202) (#204)
+* [backport galactic, foxy] data_available optimization (backport #212) (#213)
+* Fix data_available reset for timer (#215)
+* Executor ignore canceled timers (#220) (#222)
+* Resolved error in unit test see issue #230 (#231) (#233)
+* Updated documentation README.md (#234)
 
-3.0.2 (2021-07-26)
+1.0.2 (2021-07-17)
 ------------------
-* Updated codecov to ignore test folders
-* Updated bloom release status table
+* Bumped version (tag with version 1.0.1 already exists)
 
-3.0.1 (2021-07-17)
+1.0.1 (2021-07-17)
 ------------------
-* Added rclc_parameter package
 * Added quality of service entity creation API
 * Added executor prepare API
+* Added support to add subscription with context to executor
 * Added support for removing subscription from executor
-* Added support for subscription with context
-* Added quality declaration statement
 * Updated compatability function for sleep
-* Removed duplicate NOTICE files
-
-2.0.0 (2021-04-23)
-------------------
-* Added codecov support
-* New API of rcl_lifecycle in Rolling required major version bump
-
-1.0.1 (2021-03-29)
-------------------
-* Windows port
-* Compatibility sleep function (Windows, POSIX-OS)
-* Fixed RCL lifecycle API change for Rolling
+* Added quality declaration statement
+* Used executor allocator in spin
 
 1.0.0 (2021-03-04)
 ------------------

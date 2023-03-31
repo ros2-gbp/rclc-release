@@ -2,63 +2,32 @@
 Changelog for package rclc_examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.0.9 (2023-03-22)
+1.1.2 (2023-03-31)
 ------------------
-* Example real-time concurreny timer and subscription (#329)
-* Updated documentation (#332)
-* Updating README: updated table of contents and adding missing examples. (#335)
-* Added documentation about number_of_handles in all examples. (#341)
+* Example real-time concurreny timer and subscription (backport #329) (#331)
+* updated rclc_examples (backport #332) (#333)
+* Updated README in rclc_examples (backport #335) (#337)
 
-3.0.8 (2022-04-14)
+1.1.1 (2022-03-16)
 ------------------
-* Fix RCLC int parameter get (cherry-pick) (#272)
-* Upgrade parameters (#274)
+* Backport parameters (#263)
 
-
-3.0.7 (2022-02-17)
+1.1.0 (2022-01-25)
 ------------------
-* no changes
+* Feature request: check for valid ros context in spin_some (#165) (#167)
+* Ignoring unsuccessful SERVICE_TAKE (#175) (#177)
+* added pingpong example (backport #172) (#187)
+* [backport galactic, foxy] data_available optimization (backport #212) (#213)
 
-3.0.6 (2022-01-25)
+1.0.2 (2021-07-17)
 ------------------
-* Create service context in main (#224)
-* Add thread dependency to examples (Rolling) (#237)
+* Bumped version (tag with version 1.0.1 already exists)
 
-3.0.5 (2021-11-23)
+1.0.1 (2021-07-17)
 ------------------
-* no change
-
-3.0.4 (2021-11-17)
-------------------
-* added pingpong example (#172)
-* Provide lifecycle services in the rclc lifecycle nodes (#51)
-* RCLC Actions Implementation (#170)
-
-3.0.3 (2021-07-28)
-------------------
-* Version bump
-
-3.0.2 (2021-07-26)
-------------------
-* Version bump
-
-3.0.1 (2021-07-17)
-------------------
-* Added example for parameter server
-* Added example for executor prepare API
 * Added example for quality of service entity creation API
+* Added example for executor prepare API
 * Added example for subscription with context
-
-2.0.0 (2021-04-23)
-------------------
-* added codecov support
-* new API of rcl_lifecycle in Rolling required major version bump
-
-1.0.1 (2021-03-29)
-------------------
-* Windows port
-* Compatibility sleep function (Windows, POSIX-OS)
-* Fixed RCL lifecycle API change for Rolling
 
 1.0.0 (2021-03-04)
 ------------------

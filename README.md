@@ -1,12 +1,11 @@
 # The rclc repository
-This repository provides the rclc package, which complements the [ROS Client Support Library (rcl)](https://github.com/ros2/rcl/) to make up a complete ROS 2 client library for the C programming language. That is, rclc does not add a new layer of types on top of rcl (like rclcpp and rclpy do) but only provides convenience functions that ease the programming with the rcl types. New types are introduced only for concepts that are missing in rcl, most important an Executor, Lifecycle Node and the Parameter server.
+This repository provides the rclc package, which complements the [ROS Client Support Library (rcl)](https://github.com/ros2/rcl/) to make up a complete ROS 2 client library for the C programming language. That is, rclc does not add a new layer of types on top of rcl (like rclcpp and rclpy do) but only provides convenience functions that ease the programming with the rcl types. New types are introduced only for concepts that are missing in rcl, most important an Executor and a Lifecycle Node.
 
-In detail, this repository contains four packages:
+In detail, this repository contains three packages:
 
 - [rclc](rclc/) provides the mentioned convenience functions for creating instances of publishers, subscriptions, nodes, etc. with the corresponding [rcl types](https://github.com/ros2/rcl/tree/master/rcl/include/rcl). Furthermore, it provides the rclc Executor for C, analogously to rclcpp's [Executor class](https://github.com/ros2/rclcpp/blob/master/rclcpp/include/rclcpp/executor.hpp) for C++. A key feature compared to the rclcpp Executor is that it includes features for implementing deterministic timing behavior.
 - [rclc_lifecycle](rclc_lifecycle/) introduces an rclc Lifecycle Node, bundling an rcl Node and the [lifecycle state machine](http://design.ros2.org/articles/node_lifecycle.html) from the [rcl_lifecycle package](https://github.com/ros2/rcl/tree/master/rcl_lifecycle).
 - [rclc_examples](rclc_examples/) provides small examples for the use of the convenience functions and the rclc Executor, as well as a small example for the use of the rclc Lifecycle Node.
-- [rclc_parameter](rclc_parameter/) provides convenience functions for creating parameter server instances with full ROS2 parameters client compatibility.
 
 Technical information on the interfaces and the usage of these packages is given in the README.md files in the corresponding subfolders.
 
@@ -69,13 +68,9 @@ Bloom release status of the packages in [github.com/ros2/rclc/](https://github.c
 | [rclc_lifecycle](https://github.com/ros2/rclc/tree/master/rclc_lifecycle) 
 | | Foxy | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Fbin_uF64__rclc_lifecycle__ubuntu_focal_amd64__binary)](https://build.ros2.org/job/Fbin_uF64__rclc_lifecycle__ubuntu_focal_amd64__binary/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Fbin_ubv8_uFv8__rclc_lifecycle__ubuntu_focal_arm64__binary)](https://build.ros2.org/job/Fbin_ubv8_uFv8__rclc_lifecycle__ubuntu_focal_arm64__binary/) | 
 | | Humble | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__rclc_lifecycle__ubuntu_jammy_amd64__binary)](https://build.ros2.org/job/Hbin_uJ64__rclc_lifecycle__ubuntu_jammy_amd64__binary/)|  [![Build Status](https://build.ros2.org/buildStatus/icon?job=Hbin_ujv8_uJv8__rclc_lifecycle__ubuntu_jammy_arm64__binary)](https://build.ros2.org/job/Hbin_ujv8_uJv8__rclc_lifecycle__ubuntu_jammy_arm64__binary/) |
-| | Rolling | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_uJ64__rclc_lifecycle__ubuntu_jammy_amd64__binary)](https://build.ros2.org/job/Rbin_uJ64__rclc_lifecycle__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_ujv8_uJv8__rclc_lifecycle__ubuntu_jammy_arm64__binary)](https://build.ros2.org/job/Rbin_ujv8_uJv8__rclc_lifecycle__ubuntu_jammy_arm64__binary/) | 
-|     |     |   |   |    
-| [rclc_parameter](https://github.com/ros2/rclc/tree/master/rclc_parameter) 
-| | Humble | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__rclc_parameter__ubuntu_jammy_amd64__binary)](https://build.ros2.org/job/Hbin_uJ64__rclc_parameter__ubuntu_jammy_amd64__binary/) |  [![Build Status](https://build.ros2.org/buildStatus/icon?job=Hbin_ujv8_uJv8__rclc_parameter__ubuntu_jammy_arm64__binary)](https://build.ros2.org/job/Hbin_ujv8_uJv8__rclc_parameter__ubuntu_jammy_arm64__binary/) |
-| | Rolling | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_uJ64__rclc_parameter__ubuntu_jammy_amd64__binary)](https://build.ros2.org/job/Rbin_uJ64__rclc_parameter__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_ujv8_uJv8__rclc_parameter__ubuntu_jammy_arm64__binary)](https://build.ros2.org/job/Rbin_ujv8_uJv8__rclc_parameter__ubuntu_jammy_arm64__binary/)
+| | Rolling | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_uJ64__rclc_lifecycle__ubuntu_jammy_amd64__binary)](https://build.ros2.org/job/Rbin_uJ64__rclc_lifecycle__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/buildStatus/icon?job=Rbin_ujv8_uJv8__rclc_lifecycle__ubuntu_jammy_arm64__binary)](https://build.ros2.org/job/Rbin_ujv8_uJv8__rclc_lifecycle__ubuntu_jammy_arm64__binary/) 
 
 ## Code coverage
-The code coverage is tested with every commit, pull request. Results are available at [codecov](https://app.codecov.io/gh/ros2/rclc/branch/master/).
+The code coverage is tested with every commit, pull request. Results are available at [codecov](https://app.codecov.io/gh/ros2/rclc/branch/foxy/).
 
-[![codecov](https://codecov.io/gh/ros2/rclc/branch/master/graph/badge.svg?token=QzyykDh4zF)](https://codecov.io/gh/ros2/rclc)
+[![codecov](https://codecov.io/gh/ros2/rclc/branch/foxy/graph/badge.svg?token=QzyykDh4zF)](https://codecov.io/gh/ros2/rclc)
