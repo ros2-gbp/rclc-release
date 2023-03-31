@@ -1,3 +1,30 @@
+## rclc (foxy) - 1.1.2-1
+
+The packages in the `rclc` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --rosdistro foxy --track foxy rclc` on `Fri, 31 Mar 2023 15:01:50 -0000`
+
+These packages were released:
+- `rclc`
+- `rclc_examples`
+- `rclc_lifecycle`
+- `rclc_parameter`
+
+Version of package(s) in repository `rclc`:
+
+- upstream repository: https://github.com/ros2/rclc.git
+- release repository: https://github.com/ros2-gbp/rclc-release.git
+- rosdistro version: `1.1.1-1`
+- old version: `1.1.1-1`
+- new version: `1.1.2-1`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `0.5.2`
+- rosdep version: `0.22.2`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## rclc (rolling) - 3.0.9-2
 
 The packages in the `rclc` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling rclc` on `Mon, 27 Mar 2023 16:54:27 -0000`
