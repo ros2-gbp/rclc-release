@@ -1,5 +1,5 @@
 // Copyright (c) 2020 - for information on the respective copyright owner
-// see the NOTICE file and/or the repository https://github.com/micro-ROS/rclc.
+// see the NOTICE file and/or the repository https://github.com/ros2/rclc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,25 +14,30 @@
 // limitations under the License.
 
 #include <stdio.h>
-#include <std_msgs/msg/string.h>
+#include <std_msgs/msg/int32.h>
 #include <rclc/executor.h>
 #include <rclc/rclc.h>
 
 // these data structures for the publisher and subscriber are global, so that
 // they can be configured in main() and can be used in the corresponding callback.
 rcl_publisher_t my_pub;
-std_msgs__msg__String pub_msg;
-std_msgs__msg__String sub_msg;
+std_msgs__msg__Int32 pub_msg;
+std_msgs__msg__Int32 sub_msg;
+unsigned int short_timer_counter = 0;
 
 /***************************** CALLBACKS ***********************************/
 
 void my_subscriber_callback(const void * msgin)
 {
-  const std_msgs__msg__String * msg = (const std_msgs__msg__String *)msgin;
+  const std_msgs__msg__Int32 * msg = (const std_msgs__msg__Int32 *)msgin;
   if (msg == NULL) {
     printf("Callback: msg NULL\n");
   } else {
-    printf("Callback: I heard: %s\n", msg->data.data);
+    printf("Callback: I heard: %d\n", msg->data);
+  }
+  if (msg->data % 2)
+  {
+    rclc_sleep_ms(900);
   }
 }
 
@@ -43,14 +48,23 @@ void my_timer_callback(rcl_timer_t * timer, int64_t last_call_time)
   if (timer != NULL) {
     //printf("Timer: time since last call %d\n", (int) last_call_time);
     rc = rcl_publish(&my_pub, &pub_msg, NULL);
+
     if (rc == RCL_RET_OK) {
-      printf("Published message %s\n", pub_msg.data.data);
+      // printf("Published message %d\n", pub_msg.data);
     } else {
-      printf("timer_callback: Error publishing message %s\n", pub_msg.data.data);
+      printf("timer_callback: Error publishing message %d\n", pub_msg.data);
     }
+    pub_msg.data++;
   } else {
     printf("timer_callback Error: timer parameter is NULL\n");
   }
+}
+
+void short_timer_callback(rcl_timer_t * timer, int64_t last_call_time)
+{
+  RCLC_UNUSED(timer);
+  RCLC_UNUSED(last_call_time);
+  printf("shorttimer %d\n",short_timer_counter++);
 }
 
 /******************** MAIN PROGRAM ****************************************/
@@ -69,7 +83,7 @@ int main(int argc, const char * argv[])
 
   // create rcl_node
   rcl_node_t my_node = rcl_get_zero_initialized_node();
-  rc = rclc_node_init_default(&my_node, "node_0", "executor_examples", &support);
+  rc = rclc_node_init_default(&my_node, "node_0", "", &support);
   if (rc != RCL_RET_OK) {
     printf("Error in rclc_node_init_default\n");
     return -1;
@@ -79,7 +93,7 @@ int main(int argc, const char * argv[])
   // my_pub is global, so that the timer callback can access this publisher.
   const char * topic_name = "topic_0";
   const rosidl_message_type_support_t * my_type_support =
-    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String);
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32);
 
   rc = rclc_publisher_init_default(
     &my_pub,
@@ -106,13 +120,22 @@ int main(int argc, const char * argv[])
     printf("Created timer with timeout %d ms.\n", timer_timeout);
   }
 
+  rcl_timer_t short_timer = rcl_get_zero_initialized_timer();
+  const unsigned int short_timer_timeout = 100;
+  rc = rclc_timer_init_default(
+    &short_timer,
+    &support,
+    RCL_MS_TO_NS(short_timer_timeout),
+    short_timer_callback);
+  if (rc != RCL_RET_OK) {
+    printf("Error in rcl_timer_init_default.\n");
+    return -1;
+  } else {
+    printf("Created timer with timeout %d ms.\n", short_timer_timeout);
+  }
+
   // assign message to publisher
-  std_msgs__msg__String__init(&pub_msg);
-  const unsigned int PUB_MSG_CAPACITY = 20;
-  pub_msg.data.data = malloc(PUB_MSG_CAPACITY);
-  pub_msg.data.capacity = PUB_MSG_CAPACITY;
-  snprintf(pub_msg.data.data, pub_msg.data.capacity, "Hello World!");
-  pub_msg.data.size = strlen(pub_msg.data.data);
+  pub_msg.data = 1;
 
   // create subscription
   rcl_subscription_t my_sub = rcl_get_zero_initialized_subscription();
@@ -128,8 +151,8 @@ int main(int argc, const char * argv[])
     printf("Created subscriber %s:\n", topic_name);
   }
 
-  // one string message for subscriber
-  std_msgs__msg__String__init(&sub_msg);
+  // initialize subscription message
+  std_msgs__msg__Int32__init(&sub_msg);
 
   ////////////////////////////////////////////////////////////////////////////
   // Configuration of RCL Executor
@@ -137,7 +160,14 @@ int main(int argc, const char * argv[])
   rclc_executor_t executor;
   executor = rclc_executor_get_zero_initialized_executor();
   // total number of handles = #subscriptions + #timers
-  unsigned int num_handles = 1 + 1;
+  // check also xrce-dds configuration for maximum number of publisher, 
+  // subscribers, timers etc. 
+  // Note:
+  // If you need more than the default number of publisher/subscribers, etc., you
+  // need to configure the micro-ROS middleware also!
+  // See documentation in the executor.h at the function rclc_executor_init()
+  // for more details.
+  unsigned int num_handles = 1 + 2;
   printf("Debug: number of DDS handles: %u\n", num_handles);
   rclc_executor_init(&executor, &support.context, num_handles, &allocator);
 
@@ -154,13 +184,12 @@ int main(int argc, const char * argv[])
     printf("Error in rclc_executor_add_timer.\n");
   }
 
-  // Optional prepare for avoiding allocations during spin
-  rclc_executor_prepare(&executor);
-
-  for (unsigned int i = 0; i < 10; i++) {
-    // timeout specified in nanoseconds (here 1s)
-    rclc_executor_spin_some(&executor, 1000 * (1000 * 1000));
+  rclc_executor_add_timer(&executor, &short_timer);
+  if (rc != RCL_RET_OK) {
+    printf("Error in rclc_executor_add_timer.\n");
   }
+  // Start Executor
+  rclc_executor_spin(&executor);
 
   // clean up
   rc = rclc_executor_fini(&executor);
@@ -170,8 +199,8 @@ int main(int argc, const char * argv[])
   rc += rcl_node_fini(&my_node);
   rc += rclc_support_fini(&support);
 
-  std_msgs__msg__String__fini(&pub_msg);
-  std_msgs__msg__String__fini(&sub_msg);
+  std_msgs__msg__Int32__fini(&pub_msg);
+  std_msgs__msg__Int32__fini(&sub_msg);
 
   if (rc != RCL_RET_OK) {
     printf("Error while cleaning up!\n");
