@@ -1,0 +1,12 @@
+Source: ros-kilted-rclc-parameter
+Section: misc
+Priority: optional
+Maintainer: Antonio Cuadros <antoniocuadros@eprosima.com>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-cmake-gtest <!nocheck>, ros-kilted-ament-cmake-pytest <!nocheck>, ros-kilted-ament-cmake-ros, ros-kilted-ament-lint-auto <!nocheck>, ros-kilted-ament-lint-common <!nocheck>, ros-kilted-builtin-interfaces, ros-kilted-example-interfaces <!nocheck>, ros-kilted-osrf-testing-tools-cpp <!nocheck>, ros-kilted-rcl, ros-kilted-rcl-interfaces, ros-kilted-rclc, ros-kilted-rclcpp <!nocheck>, ros-kilted-rcutils, ros-kilted-rosidl-runtime-c, ros-kilted-std-msgs <!nocheck>, ros-kilted-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kilted-rclc-parameter
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kilted-builtin-interfaces, ros-kilted-rcl, ros-kilted-rcl-interfaces, ros-kilted-rclc, ros-kilted-rcutils, ros-kilted-rosidl-runtime-c, ros-kilted-ros-workspace
+Description: Parameter server implementation for micro-ROS nodes
