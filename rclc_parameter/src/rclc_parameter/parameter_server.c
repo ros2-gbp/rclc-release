@@ -545,7 +545,7 @@ init_parameter_server_memory(
     mem_allocs_ok &= rcl_interfaces__msg__ParameterEvent__init(&parameter_server->event_list);
     mem_allocs_ok &= rosidl_runtime_c__String__assign(
       &parameter_server->event_list.node,
-      rcl_node_get_name(node));
+      rcl_node_get_fully_qualified_name(node));
   }
 
   if (!mem_allocs_ok) {
