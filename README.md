@@ -1,3 +1,30 @@
+## rclc (rolling) - 6.2.1-1
+
+The packages in the `rclc` repository were released into the `rolling` distro by running `/home/jst3si/.local/bin/bloom-release --rosdistro rolling --track rolling rclc` on `Mon, 02 Mar 2026 15:25:30 -0000`
+
+These packages were released:
+- `rclc`
+- `rclc_examples`
+- `rclc_lifecycle`
+- `rclc_parameter`
+
+Version of package(s) in repository `rclc`:
+
+- upstream repository: https://github.com/ros2/rclc.git
+- release repository: https://github.com/ros2-gbp/rclc-release.git
+- rosdistro version: `6.2.0-1`
+- old version: `6.2.0-1`
+- new version: `6.2.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.13.0`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## rclc (jazzy) - 6.1.2-1
 
 The packages in the `rclc` repository were released into the `jazzy` distro by running `/home/jst3si/.local/bin/bloom-release --rosdistro jazzy --edit-track --track jazzy rclc` on `Mon, 02 Mar 2026 15:00:16 -0000`
