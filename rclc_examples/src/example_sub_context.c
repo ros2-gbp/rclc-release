@@ -74,15 +74,19 @@ int main(int argc, const char * argv[])
     {100, "bar counting from 100"},
     {300, "baz counting from 300"},
   };
-  rcl_publisher_t my_pubs[n_topics];
-  std_msgs__msg__String pub_msgs[n_topics];
-  rcl_subscription_t my_subs[n_topics];
-  std_msgs__msg__String sub_msgs[n_topics];
+  rcl_publisher_t * my_pubs = malloc(sizeof(rcl_publisher_t) * n_topics);
+  std_msgs__msg__String * pub_msgs = malloc(sizeof(std_msgs__msg__String) * n_topics);
+  rcl_subscription_t * my_subs = malloc(sizeof(rcl_subscription_t) * n_topics);
+  std_msgs__msg__String * sub_msgs = malloc(sizeof(std_msgs__msg__String) * n_topics);
 
   // create init_options
   rc = rclc_support_init(&support, argc, argv, &allocator);
   if (rc != RCL_RET_OK) {
     printf("Error rclc_support_init.\n");
+    free(my_pubs);
+    free(pub_msgs);
+    free(my_subs);
+    free(sub_msgs);
     return -1;
   }
 
@@ -91,6 +95,10 @@ int main(int argc, const char * argv[])
   rc = rclc_node_init_default(&my_node, "node_0", "executor_examples", &support);
   if (rc != RCL_RET_OK) {
     printf("Error in rclc_node_init_default\n");
+    free(my_pubs);
+    free(pub_msgs);
+    free(my_subs);
+    free(sub_msgs);
     return -1;
   }
 
@@ -106,12 +114,18 @@ int main(int argc, const char * argv[])
       topic_names[i]);
     if (RCL_RET_OK != rc) {
       printf("Error in rclc_publisher_init_default %s.\n", topic_names[i]);
+      free(my_pubs);
+      free(pub_msgs);
+      free(my_subs);
+      free(sub_msgs);
       return -1;
     }
     // assign message to publisher
     std_msgs__msg__String__init(&( pub_msgs[i] ) );
     const unsigned int PUB_MSG_CAPACITY = 40;
-    pub_msgs[i].data.data = allocator.reallocate(pub_msgs[i].data.data, PUB_MSG_CAPACITY, allocator.state);
+    pub_msgs[i].data.data = allocator.reallocate(
+      pub_msgs[i].data.data, PUB_MSG_CAPACITY,
+      allocator.state);
     pub_msgs[i].data.capacity = PUB_MSG_CAPACITY;
     snprintf(
       pub_msgs[i].data.data, pub_msgs[i].data.capacity, "Hello World! on %s",
@@ -127,6 +141,10 @@ int main(int argc, const char * argv[])
       topic_names[i]);
     if (rc != RCL_RET_OK) {
       printf("Failed to create subscriber %s.\n", topic_names[i]);
+      free(my_pubs);
+      free(pub_msgs);
+      free(my_subs);
+      free(sub_msgs);
       return -1;
     } else {
       printf("Created subscriber %s:\n", topic_names[i]);
@@ -205,7 +223,15 @@ int main(int argc, const char * argv[])
 
   if (rc != RCL_RET_OK) {
     printf("Error while cleaning up!\n");
+    free(my_pubs);
+    free(pub_msgs);
+    free(my_subs);
+    free(sub_msgs);
     return -1;
   }
+  free(my_pubs);
+  free(pub_msgs);
+  free(my_subs);
+  free(sub_msgs);
   return 0;
 }
