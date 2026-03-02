@@ -1473,6 +1473,12 @@ _rclc_execute(rclc_executor_handle_t * handle)
         }
         // handle rcl-side services
         rc = rcl_send_response(handle->service, &handle->req_id, handle->data_response_msg);
+        if (rc == RCL_RET_TIMEOUT) {
+          // because of racy condition between service client and server endpoint creation,
+          // server cannot find the concerned client just yet.
+          PRINT_RCLC_WARN(rclc_execute, rcl_send_response);
+          rc = RCL_RET_OK;
+        }
         if (rc != RCL_RET_OK) {
           PRINT_RCLC_ERROR(rclc_execute, rcl_send_response);
           return rc;
