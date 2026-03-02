@@ -1,10 +1,10 @@
-name: CI RCLC Jazzy
+name: CI RCLC Rolling
 
 on:
   push:
-    branches: [ jazzy ]
+    branches: [ rolling ]
   pull_request:
-    branches: [ jazzy ]
+    branches: [ rolling ]
   schedule:
     # Run once per day to detect broken dependencies.
     - cron: '33 6 * * *'
@@ -16,15 +16,15 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-24.04 ]
-        ros_distribution: [ jazzy ]
+        ros_distribution: [ rolling ]
         include:
           - docker_image: ubuntu:noble
-            ros_distribution: jazzy
+            ros_distribution: rolling
     container:
       image: ${{ matrix.docker_image }}
     steps:
-    - uses: actions/checkout@v5
-    - uses: ros-tooling/setup-ros@0.7.15
+    - uses: actions/checkout@v3
+    - uses: ros-tooling/setup-ros@0.7.9
       with:
         use-ros2-testing: true
         required-ros-distributions: ${{ matrix.ros_distribution }}
@@ -35,7 +35,7 @@ jobs:
         apt-get install ros-${{ matrix.ros_distribution }}-rclcpp-action
         apt-get install ros-${{ matrix.ros_distribution }}-mimick-vendor
         apt-get -y install ros-${{ matrix.ros_distribution }}-performance-test-fixture
-    - uses : ros-tooling/action-ros-ci@0.4.5
+    - uses : ros-tooling/action-ros-ci@0.3.13
       with:
         package-name: "rclc rclc_examples rclc_lifecycle rclc_parameter"
         target-ros2-distro: ${{ matrix.ros_distribution }}

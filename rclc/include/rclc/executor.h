@@ -455,7 +455,6 @@ rclc_executor_add_service(
  * \return `RCL_RET_INVALID_ARGUMENT` if any parameter is a null pointer
  * \return `RCL_RET_ERROR` if any other error occured
  */
-RCLC_PUBLIC
 rcl_ret_t
 rclc_executor_add_action_client(
   rclc_executor_t * executor,
@@ -495,7 +494,7 @@ rclc_executor_add_action_client(
  * \return `RCL_RET_INVALID_ARGUMENT` if any parameter is a null pointer
  * \return `RCL_RET_ERROR` if any other error occured
  */
-RCLC_PUBLIC
+
 rcl_ret_t
 rclc_executor_add_action_server(
   rclc_executor_t * executor,

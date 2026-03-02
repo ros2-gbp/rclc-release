@@ -2,21 +2,18 @@
 Changelog for package rclc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.1.2 (2026-02-27)
+6.2.1 (2025-05-22)
 ------------------
-* updated ci.yml
+* Use target_link_libraries instead of ament_target_dependencies (#419)
+* Do not return error when rcl_send_response timeout. (#408)
 
-6.1.1 (2026-02-26)
+6.2.0 (2024-10-15)
 ------------------
 * added CI status for iron builds (#377)
 * rclc_executor: improve enum type names (#379)
-* fix rclc_example: memory leaking in msg.data allocation (backport#386)…(#387)
+* fix rclc_example: memory leaking in msg.data allocation (backport #386) (#387)
 * updated ci versions (#396)
-* Add Antón as mantainer (#420) (#423)
-* windows port (#426) (#427)
-* Add Eugenio and Carlos as maintainers (#430) (#433)
-* Fix REP url locations (#436) (#438)
-
+* updated ros-tooling versions (#407)
 
 6.1.0 (2023-06-15)
 ------------------

@@ -2,13 +2,13 @@
 Changelog for package rclc_examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.1.2 (2026-02-27)
+6.2.1 (2025-05-22)
 ------------------
-* no changes
+* Use target_link_libraries instead of ament_target_dependencies (#419)
 
-6.1.1 (2026-02-26)
+6.2.0 (2024-10-15)
 ------------------
-* windows port (#426) (#427)
+* fix rclc_example: memory leaking in msg.data allocation (backport #386) (#387)
 
 6.1.0 (2023-06-15)
 ------------------
