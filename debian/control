@@ -1,0 +1,12 @@
+Source: ros-kilted-rclc
+Section: misc
+Priority: optional
+Maintainer: Jan Staschulat <jan.staschulat@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-cmake-gtest <!nocheck>, ros-kilted-ament-cmake-pytest <!nocheck>, ros-kilted-ament-cmake-ros, ros-kilted-ament-lint-auto <!nocheck>, ros-kilted-ament-lint-common <!nocheck>, ros-kilted-example-interfaces <!nocheck>, ros-kilted-launch-testing <!nocheck>, ros-kilted-osrf-testing-tools-cpp <!nocheck>, ros-kilted-rcl, ros-kilted-rcl-action, ros-kilted-rclcpp <!nocheck>, ros-kilted-rclcpp-action <!nocheck>, ros-kilted-rcutils, ros-kilted-rosidl-generator-c, ros-kilted-rosidl-typesupport-c, ros-kilted-std-msgs <!nocheck>, ros-kilted-test-msgs <!nocheck>, ros-kilted-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kilted-rclc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kilted-rcl, ros-kilted-rcl-action, ros-kilted-rcutils, ros-kilted-rosidl-generator-c, ros-kilted-ros-workspace
+Description: The ROS client library in C.
