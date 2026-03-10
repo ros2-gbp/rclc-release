@@ -2,9 +2,15 @@
 Changelog for package rclc_examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.2.3 (2026-03-03)
+6.3.0 (2026-03-05)
 ------------------
-* version bump (tag 6.2.2 already taken on rolling)
+* version bump
+
+6.2.2 (2026-03-01)
+------------------
+* windows port (backport #426) (#429)
+* Compatiblity with 'Populate Transitions' ros2/rcl#1269 (#435)
+* introduce rclc_get_zero_initialized_lifecycle_node(). (#443)
 
 6.2.1 (2025-05-22)
 ------------------

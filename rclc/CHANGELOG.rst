@@ -2,9 +2,18 @@
 Changelog for package rclc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.2.3 (2026-03-03)
+6.3.0 (2026-03-05)
 ------------------
-* version bump (tag 6.2.2 already tagged on rolling)
+* version bump
+
+6.2.2 (2026-03-01)
+------------------
+* Add Antón as mantainer (#420)
+* Bump setup-ros (#424)
+* windows port (backport #426) (#429)
+* Add Eugenio and Carlos as maintainers (#430)
+* Fix REP url locations (#436)
+* Compatiblity with 'Populate Transitions' ros2/rcl#1269 (#435)
 
 6.2.1 (2025-05-22)
 ------------------

@@ -1,10 +1,10 @@
-name: CI RCLC Kilted
+name: CI RCLC Rolling
 
 on:
   push:
-    branches: [ kilted ]
+    branches: [ rolling ]
   pull_request:
-    branches: [ kilted ]
+    branches: [ rolling ]
   schedule:
     # Run once per day to detect broken dependencies.
     - cron: '33 6 * * *'
@@ -16,10 +16,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-24.04 ]
-        ros_distribution: [ kilted ]
+        ros_distribution: [ rolling ]
         include:
           - docker_image: ubuntu:noble
-            ros_distribution: kilted
+            ros_distribution: rolling
     container:
       image: ${{ matrix.docker_image }}
     steps:

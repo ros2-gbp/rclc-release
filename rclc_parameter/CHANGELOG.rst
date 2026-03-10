@@ -2,9 +2,13 @@
 Changelog for package rclc_parameter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.2.3 (2026-03-03)
+6.3.0 (2026-03-05)
 ------------------
-* version bump (tag 6.2.2 already taken on rolling)
+* version bump
+
+6.2.2 (2026-03-01)
+------------------
+* Fix REP url locations (#436)
 
 6.2.1 (2025-05-22)
 ------------------
