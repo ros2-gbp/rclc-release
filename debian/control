@@ -1,0 +1,12 @@
+Source: ros-lyrical-rclc-examples
+Section: misc
+Priority: optional
+Maintainer: Jan Staschulat <jan.staschulat@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake-ros, ros-lyrical-example-interfaces, ros-lyrical-lifecycle-msgs, ros-lyrical-rcl, ros-lyrical-rclc, ros-lyrical-rclc-lifecycle, ros-lyrical-rclc-parameter, ros-lyrical-std-msgs, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/rclc_examples/#lyrical
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-rclc-examples
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-example-interfaces, ros-lyrical-lifecycle-msgs, ros-lyrical-rcl, ros-lyrical-rclc, ros-lyrical-rclc-lifecycle, ros-lyrical-rclc-parameter, ros-lyrical-std-msgs, ros-lyrical-ros-workspace
+Description: Example of using rclc_executor
