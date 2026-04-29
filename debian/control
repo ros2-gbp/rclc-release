@@ -1,0 +1,12 @@
+Source: ros-lyrical-rclc-parameter
+Section: misc
+Priority: optional
+Maintainer: Antonio Cuadros <antoniocuadros@eprosima.com>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake-gtest <!nocheck>, ros-lyrical-ament-cmake-pytest <!nocheck>, ros-lyrical-ament-cmake-ros, ros-lyrical-ament-lint-auto <!nocheck>, ros-lyrical-ament-lint-common <!nocheck>, ros-lyrical-builtin-interfaces, ros-lyrical-example-interfaces <!nocheck>, ros-lyrical-osrf-testing-tools-cpp <!nocheck>, ros-lyrical-rcl, ros-lyrical-rcl-interfaces, ros-lyrical-rclc, ros-lyrical-rclcpp <!nocheck>, ros-lyrical-rcutils, ros-lyrical-rosidl-runtime-c, ros-lyrical-std-msgs <!nocheck>, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/rclc_parameter/#lyrical
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-rclc-parameter
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-builtin-interfaces, ros-lyrical-rcl, ros-lyrical-rcl-interfaces, ros-lyrical-rclc, ros-lyrical-rcutils, ros-lyrical-rosidl-runtime-c, ros-lyrical-ros-workspace
+Description: Parameter server implementation for micro-ROS nodes
