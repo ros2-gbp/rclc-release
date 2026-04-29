@@ -1,0 +1,12 @@
+Source: ros-lyrical-rclc-lifecycle
+Section: misc
+Priority: optional
+Maintainer: Jan Staschulat <jan.staschulat@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake-gtest <!nocheck>, ros-lyrical-ament-cmake-ros, ros-lyrical-ament-lint-auto <!nocheck>, ros-lyrical-ament-lint-common <!nocheck>, ros-lyrical-lifecycle-msgs, ros-lyrical-osrf-testing-tools-cpp <!nocheck>, ros-lyrical-rcl-lifecycle, ros-lyrical-rclc, ros-lyrical-std-msgs, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/rclc_lifecycle/#lyrical
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-rclc-lifecycle
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-lifecycle-msgs, ros-lyrical-rcl-lifecycle, ros-lyrical-rclc, ros-lyrical-std-msgs, ros-lyrical-ros-workspace
+Description: rclc lifecycle convenience methods.
