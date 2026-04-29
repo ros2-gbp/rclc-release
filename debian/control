@@ -1,0 +1,12 @@
+Source: ros-lyrical-rclc
+Section: misc
+Priority: optional
+Maintainer: Jan Staschulat <jan.staschulat@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake-gtest <!nocheck>, ros-lyrical-ament-cmake-pytest <!nocheck>, ros-lyrical-ament-cmake-ros, ros-lyrical-ament-lint-auto <!nocheck>, ros-lyrical-ament-lint-common <!nocheck>, ros-lyrical-example-interfaces <!nocheck>, ros-lyrical-launch-testing <!nocheck>, ros-lyrical-osrf-testing-tools-cpp <!nocheck>, ros-lyrical-rcl, ros-lyrical-rcl-action, ros-lyrical-rclcpp <!nocheck>, ros-lyrical-rclcpp-action <!nocheck>, ros-lyrical-rcutils, ros-lyrical-rosidl-generator-c, ros-lyrical-rosidl-typesupport-c, ros-lyrical-std-msgs <!nocheck>, ros-lyrical-test-msgs <!nocheck>, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/rclc/#lyrical
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-rclc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-rcl, ros-lyrical-rcl-action, ros-lyrical-rcutils, ros-lyrical-rosidl-generator-c, ros-lyrical-ros-workspace
+Description: The ROS client library in C.
